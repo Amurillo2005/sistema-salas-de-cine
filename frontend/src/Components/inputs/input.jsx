@@ -1,7 +1,9 @@
-export const input = ({ type, placeholder }) => {
+import "./input.css"
+
+export const Input = ({ type, placeholder }) => {
     return (
         <>
-            <input type={type} placeholder={placeholder} />
+            <input className="input" type={type} placeholder={placeholder} />
         </>
     )
 }
