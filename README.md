@@ -1,1 +1,0 @@
-# sistema-salas-de-cine
