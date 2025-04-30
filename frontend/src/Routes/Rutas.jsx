@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../Pages/Login/Login";
+import { Login } from "../Pages/Login/Login.jsx";
 
 export const Rutas = () => {
     return (
