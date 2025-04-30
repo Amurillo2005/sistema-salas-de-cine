@@ -25,8 +25,8 @@ export const Login = () => {
             <Input id="nombre" type="name" placeholder="Contraseña" />
           </div>
 
-          <div className='button-remember-container'>
-             <p>¿Ya tienes contraseña?</p><p className='link-to-register'>Registrate aquí</p>
+          <div className='login-remember-container'>
+            <p>¿Ya tienes contraseña?</p><p className='link-to-register'>Registrate aquí</p>
           </div>
 
           <div className='login-button-container'>

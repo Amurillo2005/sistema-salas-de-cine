@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.register-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-form{
+    width: 500px;
+    padding: 40px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.label-register{
+    display: block;
+    margin-bottom: 15px;
+    font-family: Poppins, sans-serif;
+}
+
+.register-title{
+    font-family: Poppins, sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.register-button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.register-button{
+    background-color: #C9C9FC;
+    color: #6363F2;
+    padding: 10px 50px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    font-family: Poppins, sans-serif;
+    margin-top: 20px;
+}
+
+.register-remember-container{
+    display: flex;
+    font-family: Poppins, sans-serif;
+    gap: 8px;
+}
+
+.link-to-login{
+    color: #0000FF;
+}

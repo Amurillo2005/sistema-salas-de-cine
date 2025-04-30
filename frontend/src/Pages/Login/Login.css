@@ -18,7 +18,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: #eee5ec;
 }
 
 .label-login{
@@ -48,7 +47,7 @@
     font-family: Poppins, sans-serif;
 }
 
-.button-remember-container{
+.login-remember-container{
     display: flex;
     font-family: Poppins, sans-serif;
     gap: 8px;
