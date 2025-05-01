@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+}
+
+.navbar-links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link a {
+    text-decoration: none;
+    color: #000;
+}
+
+.search-movies-container {
+    position: relative;
+}
+
+.search-movies-container .search-movies {
+    padding: 2px 8px;
+    border-radius: 8px;
+    border: none;
+    background-color: #D9D9D9;
+}
+
+.search-icon {
+    position: absolute;
+    left: 154px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.user-icon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
