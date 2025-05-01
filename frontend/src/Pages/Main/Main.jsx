@@ -1,6 +1,7 @@
 import "./Main.css"
 import { NavBar } from "../../Components/NavBar/NavBar"
 import { MovieCard } from "../../Components/MovieCard/MovieCard"
+import { Footer } from "../../Components/Footer/Footer"
 import img1 from "../../assets/img/img1.png"
 import img2 from "../../assets/img/img2.jpg"
 import img3 from "../../assets/img/img3.jpg"
@@ -63,6 +64,7 @@ export const Main = () => {
                     ))}
                 </div>
             </div>
+            <Footer />
         </>
     )
 }

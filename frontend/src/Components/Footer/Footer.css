@@ -1,0 +1,36 @@
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    margin-top: 70px;
+    gap: 9rem;
+
+}
+
+.footer-link,
+.footer-social-media {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-link-item a,
+.footer-social-media-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.icon-facebook{
+    color: #1877f2;
+}
+
+.icon-instagram{
+    color: #e1306c;
+}
+
+.icon-x{
+    color: #000000;
+}
