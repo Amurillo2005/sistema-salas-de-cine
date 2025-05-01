@@ -1,7 +1,5 @@
-import "./Main.css"
-import { NavBar } from "../../Components/NavBar/NavBar"
+import "./Cartelera.css"
 import { MovieCard } from "../../Components/MovieCard/MovieCard"
-import { Footer } from "../../Components/Footer/Footer"
 import img1 from "../../assets/img/img1.png"
 import img2 from "../../assets/img/img2.jpg"
 import img3 from "../../assets/img/img3.jpg"
@@ -9,7 +7,8 @@ import img4 from "../../assets/img/img4.jpg"
 import img5 from "../../assets/img/img5.png"
 import img6 from "../../assets/img/img6.jpg"
 
-export const Main = () => {
+export const Cartelera = () => {
+
     const movies = [
         {
             id: 1,
@@ -54,9 +53,9 @@ export const Main = () => {
             genero: "Accion, Aventura, Familiar, Fantasía"
         },
     ]
+
     return (
         <>
-            <NavBar />
             <div className="main-container">
                 <div className="movies-container">
                     {movies.map((movie) => (
@@ -64,7 +63,6 @@ export const Main = () => {
                     ))}
                 </div>
             </div>
-            <Footer />
         </>
     )
 }

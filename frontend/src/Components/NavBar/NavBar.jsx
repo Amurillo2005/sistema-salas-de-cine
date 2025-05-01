@@ -13,8 +13,8 @@ export const NavBar = () => {
                 <div className="navbar-links-container">
                     <div className="nav-links-container">
                         <ul className="nav-links">
-                            <li className="nav-link"><Link to="/cartelera">Cartelera</Link></li>
-                            <li className="nav-link"><Link to="/pronto">Pronto</Link></li>
+                            <li className="nav-link"><Link to="cartelera">Cartelera</Link></li>
+                            <li className="nav-link"><Link to="pronto">Pronto</Link></li>
                         </ul>
                     </div>
 
