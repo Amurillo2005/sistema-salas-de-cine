@@ -15,7 +15,8 @@ export const Cartelera = () => {
             img: img1,
             nombre: "ThunderBolts",
             estreno: "Estreno: 30-Abr-2025",
-            genero: "Accion, Aventura, Ciencia Ficción, Crimen, Drama, Fantasía"
+            genero: "Accion, Aventura, Ciencia Ficción, Crimen, Drama, Fantasía",
+            url: 'DetallePelicula'
         },
         {
             id: 2,
@@ -59,7 +60,7 @@ export const Cartelera = () => {
             <div className="main-container">
                 <div className="movies-container">
                     {movies.map((movie) => (
-                        <MovieCard key={movie.id} img={movie.img} nombre={movie.nombre} estreno={movie.estreno} genero={movie.genero} />
+                        <MovieCard key={movie.id} img={movie.img} nombre={movie.nombre} estreno={movie.estreno} genero={movie.genero} url={movie.url} />
                     ))}
                 </div>
             </div>

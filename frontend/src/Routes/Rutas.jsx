@@ -7,16 +7,18 @@ import { HomeCliente } from "../Pages/HomeCliente/HomeCliente.jsx";
 import { HomeCajero } from "../Pages/HomeCajero/HomeCajero.jsx";
 import { CajeroLayout } from "../Pages/Layouts/CajeroLayout.jsx";
 import { Pronto } from "../Pages/Pronto/Pronto.jsx";
+import DetallePelicula from "../Pages/DetallePelicula/DetallePelicula.jsx";
 
 export const Rutas = () => {
     return (
         <>
             <Router>
                 <Routes>
-                    <Route path="/cliente" element={<ClienteLayout />}>
-                        <Route index element={<HomeCliente />} />
-                        <Route path="cartelera" element={<Cartelera />} />
+                    <Route path="/" element={<ClienteLayout />}>
+                        <Route index element={<Cartelera />} />
                         <Route path="pronto" element={<Pronto />} />
+                        <Route path="DetallePelicula" element={<DetallePelicula />} />
+
                     </Route>
 
                     <Route path="/cajero" element={<CajeroLayout />}>
