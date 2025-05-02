@@ -1,46 +1,138 @@
-import "./Register.css"
-import { Input } from "../../Components/inputs/input"
+import "./Register.css";
+import { useState } from "react";
+import { Link } from "react-router-dom"
 
 export const Register = () => {
-    return (
-        <>
-            <div className="register-container">
-                <form className="register-form">
-                    <h2 className="register-title">Registrate</h2>
-                    <div>
-                        <label htmlFor="nombre" className="label-register">Nombre</label>
-                        <Input id="nombre" type="name" placeholder="Nombre" />
-                    </div>
+  const [formData, setFormData] = useState({
+    nombre: "",
+    correo: "",
+    contraseña: "",
+    telefono: null,
+    cedula: null,
+  });
 
-                    <div>
-                        <label htmlFor="correo" className="label-register">Correo</label>
-                        <Input id="correo" type="email" placeholder="Correo" />
-                    </div>
+  const handleChange = (e) => {
+    const { id, value, type } = e.target;
 
-                    <div>
-                        <label htmlFor="contraseña" className="label-register">Contraseña</label>
-                        <Input id="contraseña" type="password" placeholder="Contraseña" />
-                    </div>
+    setFormData((prev) => ({
+      ...prev,
+      [id]: type === "number" ? (value === "" ? null : Number(value)) : value,
+    }));
+  };
 
-                    <div>
-                        <label htmlFor="documentoIdentidad" className="label-register">Documento de identidad</label>
-                        <Input id="documentoIdentidad" type="number" placeholder="Contraseña" />
-                    </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-                    <div>
-                        <label htmlFor="celular" className="label-register">Celular</label>
-                        <Input id="celular" type="number" placeholder="Celular" />
-                    </div>
+    const cleanFormData = {
+      nombre: formData.nombre,
+      correo: formData.correo,
+      contraseña: formData.contraseña,
+      telefono: formData.telefono,
+      cedula: formData.cedula,
+      rol: "cliente",
+    };
 
-                    <div className='register-remember-container'>
-                        <p>¿Ya tienes cuenta?</p><p className='link-to-login'>Inicia sesión</p>
-                    </div>
+    try {
+      const res = await fetch("http://localhost:3000/api/usuarios/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cleanFormData),
+      });
 
-                    <div className='register-button-container'>
-                        <button className='register-button' type="submit">Registrate</button>
-                    </div>
-                </form>
-            </div>
-        </>
-    )
-}
+      const data = await res.json();
+      if (res.ok) {
+        alert("✅ Usuario registrado correctamente");
+        setFormData({
+          nombre: "",
+          correo: "",
+          contraseña: "",
+          telefono: null,
+          cedula: null,
+        });
+      } else {
+        alert("❌ Error: " + data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("❌ Error de conexión con el servidor");
+    }
+  };
+
+  return (
+    <div className="register-container">
+      <form className="register-form" onSubmit={handleSubmit}>
+        <h2 className="register-title">Regístrate</h2>
+
+        <div>
+          <label htmlFor="nombre" className="label-register">Nombre</label>
+          <input
+            id="nombre"
+            type="text"
+            placeholder="Nombre"
+            value={formData.nombre}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="correo" className="label-register">Correo</label>
+          <input
+            id="correo"
+            type="email"
+            placeholder="Correo"
+            value={formData.correo}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="contraseña" className="label-register">Contraseña</label>
+          <input
+            id="contraseña"
+            type="password"
+            placeholder="Contraseña"
+            value={formData.contraseña}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="cedula" className="label-register">Documento de identidad</label>
+          <input
+            id="cedula"
+            type="number"
+            placeholder="Documento"
+            value={formData.cedula !== null ? formData.cedula : ""}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="telefono" className="label-register">Celular</label>
+          <input
+            id="telefono"
+            type="number"
+            placeholder="Celular"
+            value={formData.telefono !== null ? formData.telefono : ""}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
+
+        <div className='register-remember-container'>
+          <p>¿Ya tienes cuenta?</p><Link className='link-to-login' to="/login">Inicia sesión</Link>
+        </div>
+
+        <div className='register-button-container'>
+          <button className='register-button' type="submit">Registrarse</button>
+        </div>
+      </form>
+    </div>
+  );
+};

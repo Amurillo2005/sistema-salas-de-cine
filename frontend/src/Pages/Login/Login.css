@@ -53,6 +53,6 @@
     gap: 8px;
 }
 
-.link-to-register{
-    color: #0000FF;
+a.link-to-register{
+    color: #0000FF!important;
 }

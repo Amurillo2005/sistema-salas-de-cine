@@ -5,6 +5,11 @@ const Usuario = require('../models/usuarioModel');
 const register = async (req, res) => {
     const { nombre, correo, contraseña, telefono, cedula, rol } = req.body;
 
+    // Validación básica en el backend
+    if (!nombre || !correo || !contraseña || !telefono || !cedula) {
+        return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+    }
+
     try {
         const existingUser = await Usuario.findByEmail(correo);
         if (existingUser) {
@@ -15,10 +20,11 @@ const register = async (req, res) => {
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error al registrar usuario' });
+        console.error("Error en registro:", error);
+        res.status(500).json({ message: 'Error al registrar usuario', error: error.message });
     }
 };
+
 
 // Login de usuario
 const login = async (req, res) => {
@@ -44,8 +50,14 @@ const login = async (req, res) => {
 
         res.json({
             message: 'Inicio de sesión exitoso',
-            token
+            token,
+            user: {
+                id_usuario: user.id_usuario,
+                nombre: user.nombre,
+                rol: user.rol
+            }
         });
+
 
     } catch (error) {
         console.error(error);

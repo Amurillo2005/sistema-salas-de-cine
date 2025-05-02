@@ -1,14 +1,17 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-// Importar rutas
-const peliculaRoutes = require('./routes/peliculaRoutes');
-const usuarioRoutes = require('./routes/usuarioRoutes');
+// Middleware para CORS
+app.use(cors());
 
 // Middleware para leer JSON
 app.use(express.json());
 
-// Usar rutas
+// Rutas
+const peliculaRoutes = require('./routes/peliculaRoutes');
+const usuarioRoutes = require('./routes/usuarioRoutes');
+
 app.use('/api/peliculas', peliculaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
 

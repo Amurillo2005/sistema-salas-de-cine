@@ -1,62 +1,84 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import './DetallePelicula.css';
-import img1 from '../../assets/img/img1.png';
 
 const DetallePelicula = () => {
+  const { id } = useParams();
+  const [pelicula, setPelicula] = useState(null);
+
+  useEffect(() => {
+    const fetchPelicula = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/peliculas/${id}`);
+        const data = await res.json();
+        setPelicula(data);
+      } catch (error) {
+        console.error('Error al obtener película:', error);
+      }
+    };
+
+    fetchPelicula();
+  }, [id]);
+
+  if (!pelicula) {
+    return <p>Cargando película...</p>;
+  }
+
   return (
     <div className="detalle-pelicula">
       <div className="banner">
         <div className="poster">
-          <img src={img1} alt="Captain America Poster" />
+          <img src={pelicula.imagen_url} alt={pelicula.titulo} />
         </div>
         <div className="info">
-          <h1>ThunderBolts</h1>
-          <p className="subtitulo">Título en español: ThunderBolts</p>
-          <p className="fecha-lanzamiento">Estreno: 13-Feb-2025</p>
-          <p className="info-extra">Acción, Aventura, Ciencia Ficción</p>
-          <p className="clasificacion">Recomendada para Mayores de 12 años | 118 Min</p>
+          <h1>{pelicula.titulo}</h1>
+          <p className="subtitulo">{pelicula.genero}</p>
+          <p className="clasificacion">Clasificación: {pelicula.clasificacion}</p>
+          <p className="info-extra">Duración: {pelicula.duracion} min</p>
+          <p className="info-extra">Idioma: {pelicula.idioma}</p>
         </div>
       </div>
 
       <div className="descripcion">
-        <p>
-          Tras reunirse con el recién elegido presidente de Estados Unidos, Thaddeus Ross,
-          Sam se encuentra en medio de un incidente internacional. Debe descubrir la razón de un
-          nefasto complot mundial antes de que el verdadero cerebro de la operación haga que el
-          mundo entero se ponga rojo.
-        </p>
+        <p>{pelicula.sipnosis}</p>
       </div>
 
-      <div className="contenido">
-        <div className="info-tecnica">
-          <p><strong>Título Original:</strong> Captain America: Brave New World</p>
-          <p><strong>País de Origen:</strong> United States of America</p>
-          <p><strong>Director:</strong> Julius Onah</p>
-          <p><strong>Actores:</strong> Anthony Mackie, Harrison Ford, Danny Ramírez, Rosa Salazar, Liv Tyler, Giancarlo Esposito</p>
-          <p><strong>Idioma:</strong> Inglés</p>
-        </div>
-
-        <div className="funciones">
-          <h3>MAR</h3>
-          <div className="fechas">
-            <button>8<br/>SÁB</button>
-            <button>9<br/>DOM</button>
-            <button>10<br/>LUN</button>
-            <button>11<br/>MAR</button>
-            <button>12<br/>MIÉ</button>
-            <button className="icono">📅</button>
+      {pelicula.estado === "activa" ? (
+        <div className="contenido">
+          <div className="info-tecnica">
+            <h3>Información técnica</h3>
+            <p><strong>Género:</strong> {pelicula.genero}</p>
+            <p><strong>Clasificación:</strong> {pelicula.clasificacion}</p>
+            <p><strong>Idioma:</strong> {pelicula.idioma}</p>
+            <p><strong>Duración:</strong> {pelicula.duracion} minutos</p>
           </div>
 
-          <div className="sede">
-            <h4>📍 Buenavista</h4>
-            <div className="horarios">
-              <div><strong>2D Doblado</strong><button>1:30 PM</button></div>
-              <div><strong>2D Doblado</strong><button>7:00 PM</button></div>
-              <div><strong>2D Subtitulado</strong><button>9:40 PM</button></div>
+          <div className="funciones">
+            <h3>Próximas funciones</h3>
+            <div className="fechas">
+              <button className="icono">📅</button>
+              <button>Hoy</button>
+              <button>Mañana</button>
+            </div>
+
+            <div className="sede">
+              <h4>Cine Ya - Sede Centro</h4>
+              <div className="horarios">
+                <div><button>3:30 PM</button></div>
+                <div><button>6:45 PM</button></div>
+                <div><button>9:15 PM</button></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="contenido">
+          <div className="info-tecnica">
+            <h3 style={{ color: "#003b95" }}>Próximamente en cartelera</h3>
+            <p>Esta película aún no está disponible para funciones. ¡Espérala muy pronto!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

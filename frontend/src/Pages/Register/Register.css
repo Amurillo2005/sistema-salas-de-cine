@@ -54,6 +54,6 @@
     gap: 8px;
 }
 
-.link-to-login{
-    color: #0000FF;
+a.link-to-login{
+    color: #0000FF!important;
 }

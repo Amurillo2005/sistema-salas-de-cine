@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const peliculaController = require('../controllers/peliculaController');
+const PeliculaController = require('../controllers/peliculaController');
 
-// Ruta para obtener todas las películas
-router.get('/', peliculaController.getPeliculas);
+// Primero las rutas más específicas
+router.get('/pronto', PeliculaController.getPeliculasPronto);
+router.get('/:id', PeliculaController.getPeliculaById);
+router.get('/', PeliculaController.getPeliculas);
 
 module.exports = router;
