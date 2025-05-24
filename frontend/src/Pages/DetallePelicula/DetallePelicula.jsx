@@ -1,10 +1,29 @@
 import { useEffect, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 import './DetallePelicula.css';
+
+const horariosDisponibles = {
+  '2025-05-22': ['11:00', '14:00', '18:00'],
+  '2025-05-24': ['14:00', '16:30', '20:00'],
+  '2025-05-25': ['12:00', '15:00', '19:30'],
+  '2025-05-26': ['13:30', '18:00'],
+};
 
 const DetallePelicula = () => {
   const { id } = useParams();
   const [pelicula, setPelicula] = useState(null);
+  const [fecha, setFecha] = useState(new Date());
+  const [horarios, setHorarios] = useState([]);
+
+  useEffect(() => {
+    if (fecha) {
+      const key = fecha.toISOString().split('T')[0];
+      setHorarios(horariosDisponibles[key] || []);
+    }
+  }, [fecha]);
+
 
   useEffect(() => {
     const fetchPelicula = async () => {
@@ -54,19 +73,23 @@ const DetallePelicula = () => {
           </div>
 
           <div className="funciones">
-            <h3>Próximas funciones</h3>
+            <h3>Fechas</h3>
             <div className="fechas">
-              <button className="icono">📅</button>
-              <button>Hoy</button>
-              <button>Mañana</button>
+              <DatePicker selected={fecha} onChange={(date) => setFecha(date)} dateFormat='dd/MM/yyyy' minDate={new Date()} className="calendario" />
             </div>
 
             <div className="sede">
               <h4>Cine Ya - Sede Centro</h4>
               <div className="horarios">
-                <div><button>3:30 PM</button></div>
-                <div><button>6:45 PM</button></div>
-                <div><button>9:15 PM</button></div>
+                {horarios.length > 0 ? (
+                  horarios.map((hora) => (
+                    <div key={hora}>
+                      <button>{hora}</button>
+                    </div>
+                  ))
+                ) : (
+                  <p>No hay horarios disponibles para esta fecha.</p>
+                )}
               </div>
             </div>
           </div>
