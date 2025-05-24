@@ -9,6 +9,8 @@ import { HomeCajero } from "../Pages/HomeCajero/HomeCajero.jsx";
 import { Pronto } from "../Pages/Pronto/Pronto.jsx";
 import DetallePelicula from "../Pages/DetallePelicula/DetallePelicula.jsx";
 import { PrivateRoute } from "../Components/PrivateRoute";
+import  MedioPago from "../Pages/MedioPago/MedioPago.jsx";
+import CajeroMedioPago from "../Pages/MedioPago/CajeroMedioPago.jsx";
 
 // (opcional) rutas protegidas futuras
 // import Comprar from "../Pages/Comprar/Comprar.jsx";
@@ -26,6 +28,9 @@ export const Rutas = () => {
         <Route index element={<Cartelera />} />
         <Route path="pronto" element={<Pronto />} />
         <Route path="detalle/:id" element={<DetallePelicula />} />
+        <Route path="medio-pago" element={<MedioPago />} />
+        <Route path="cajero-medio-pago" element={<CajeroMedioPago />} />
+        
 
         {/* Protegido: Solo cliente puede comprar/ver compras */}
         <Route element={<PrivateRoute allowedRoles={['cliente']} />}>
