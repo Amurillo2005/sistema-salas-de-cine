@@ -28,7 +28,7 @@ export const Rutas = () => {
         <Route index element={<Cartelera />} />
         <Route path="pronto" element={<Pronto />} />
         <Route path="detalle/:id" element={<DetallePelicula />} />
-        <Route path="medio-pago" element={<MedioPago />} />
+        <Route path="medio-pago/:id_funcion" element={<MedioPago />} />
         <Route path="cajero-medio-pago" element={<CajeroMedioPago />} />
         
 

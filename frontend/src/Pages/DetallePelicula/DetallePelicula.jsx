@@ -3,6 +3,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useParams } from 'react-router-dom';
 import './DetallePelicula.css';
+import { useNavigate } from 'react-router-dom';
 
 const horariosDisponibles = {
   '2025-05-22': ['11:00', '14:00', '18:00'],
@@ -16,6 +17,7 @@ const DetallePelicula = () => {
   const [pelicula, setPelicula] = useState(null);
   const [fecha, setFecha] = useState(new Date());
   const [horarios, setHorarios] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (fecha) {
@@ -23,6 +25,28 @@ const DetallePelicula = () => {
       setHorarios(horariosDisponibles[key] || []);
     }
   }, [fecha]);
+
+  const handleSeleccionHora = async (hora) => {
+    const keyFecha = fecha.toISOString().split('T')[0];
+    console.log(`→ Buscando función: id=${id}, fecha=${keyFecha}, hora=${hora}`);
+    try {
+      const res = await fetch(`http://localhost:3000/api/funciones/buscar?id_pelicula=${id}&fecha=${keyFecha}&hora=${hora}`, {
+        cache: 'no-store',
+      });
+
+      if (!res.ok) {
+        throw new Error('Función no encontrada');
+      }
+
+      const funcion = await res.json();
+      console.log('Función encontrada:', funcion);
+      navigate(`/medio-pago/${funcion.id_funcion}`);
+    } catch (error) {
+      console.error('Error al redirigir al medio de pago:', error);
+      alert('No se pudo encontrar la función para la fecha y hora seleccionada.');
+    }
+
+  };
 
 
   useEffect(() => {
@@ -84,7 +108,7 @@ const DetallePelicula = () => {
                 {horarios.length > 0 ? (
                   horarios.map((hora) => (
                     <div key={hora}>
-                      <button>{hora}</button>
+                      <button onClick={() => handleSeleccionHora(hora)}>{hora}</button>
                     </div>
                   ))
                 ) : (

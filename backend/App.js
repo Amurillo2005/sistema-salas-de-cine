@@ -11,9 +11,11 @@ app.use(express.json());
 // Rutas
 const peliculaRoutes = require('./routes/peliculaRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const funcionRoutes = require('./routes/funcionRoutes');
 
 app.use('/api/peliculas', peliculaRoutes);
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api', funcionRoutes);
 
 // Puerto
 const PORT = process.env.PORT || 3000;
