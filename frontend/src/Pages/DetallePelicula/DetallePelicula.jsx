@@ -28,7 +28,6 @@ const DetallePelicula = () => {
 
   const handleSeleccionHora = async (hora) => {
     const keyFecha = fecha.toISOString().split('T')[0];
-    console.log(`→ Buscando función: id=${id}, fecha=${keyFecha}, hora=${hora}`);
     try {
       const res = await fetch(`http://localhost:3000/api/funciones/buscar?id_pelicula=${id}&fecha=${keyFecha}&hora=${hora}`, {
         cache: 'no-store',
