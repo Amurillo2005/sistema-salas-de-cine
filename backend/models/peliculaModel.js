@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 // Obtener todas las películas activas
 const getAll = async () => {
-  const [rows] = await db.query("SELECT * FROM peliculas WHERE estado = 'activa'");
+  const [rows] = await db.query("SELECT * FROM peliculas WHERE estado != 'inactiva'");
   return rows;
 };
 
